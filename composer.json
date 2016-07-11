@@ -1,0 +1,26 @@
+{
+  "name": "cloudbooks/cloudbooks-source",
+  "description": "Business logic for CloudBooks",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michelangelo van Dam",
+      "email": "dragonbe@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cloudbooks\\": "src/Cloudbooks"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Cloudbooks\\Test\\": "tests/Cloudbooks"
+    }
+  }
+}
