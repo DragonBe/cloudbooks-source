@@ -70,4 +70,16 @@ class MemberService
         $updatedRows = $this->tableGateway->update($data, ['id = ?' => $id]);
         return $updatedRows;
     }
+
+    public function authenticate(string $username, string $password): bool
+    {
+        $resultSet = $this->tableGateway->fetchRow([
+            'username = ?' => $username,
+            'password = ?' => $password,
+        ]);
+        if ([] === $resultSet) {
+            return false;
+        }
+        return true;
+    }
 }

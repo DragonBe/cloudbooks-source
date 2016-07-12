@@ -127,4 +127,52 @@ class MemberServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, $updatedRecords);
     }
 
+    public function loginProvider()
+    {
+        return [
+            ['foo', 'bar'],
+            ['foo@bar.baz', 'FooBarB@Z!'],
+            ['foobar@baz', 'FooBarB@Z!FooBar-'],
+        ];
+    }
+    /**
+     * @dataProvider loginProvider
+     */
+    public function testMemberCanNotAuthenticateWithWrongCredentials($username, $password)
+    {
+        $tableGatewayMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\TableGatewayInterface')->getMock();
+        $hydratorMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\HydratorInterface')->getMock();
+        $memberEntityMock = $this->getMockBuilder('\Cloudbooks\Member\Interfaces\MemberInterface')->getMock();
+
+        $tableGatewayMock->expects($this->once())
+            ->method('fetchRow')
+            ->willReturn([]);
+
+        $memberService = new MemberService($tableGatewayMock, $hydratorMock, $memberEntityMock);
+        $auth = $memberService->authenticate($username, $password);
+        $this->assertFalse($auth);
+    }
+    /**
+     * @dataProvider loginProvider
+     */
+    public function testMemberCanAuthenticateWithCorrectCredentials($username, $password)
+    {
+        $tableGatewayMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\TableGatewayInterface')->getMock();
+        $hydratorMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\HydratorInterface')->getMock();
+        $memberEntityMock = $this->getMockBuilder('\Cloudbooks\Member\Interfaces\MemberInterface')->getMock();
+
+        $tableGatewayMock->expects($this->once())
+            ->method('fetchRow')
+            ->willReturn([
+                'id' => rand(1, 10000),
+                'email' => $username,
+                'name' => 'Foo Bar',
+                'password' => $password,
+            ]);
+
+        $memberService = new MemberService($tableGatewayMock, $hydratorMock, $memberEntityMock);
+        $auth = $memberService->authenticate($username, $password);
+        $this->assertTrue($auth);
+    }
+
 }
