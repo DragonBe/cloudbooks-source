@@ -94,5 +94,4 @@ class PdoTableGateway extends TableAbstract
         $id = (int) $stmt->rowCount();
         return $id;
     }
-
 }

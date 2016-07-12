@@ -64,5 +64,4 @@ class SilexServiceProvider implements ServiceProviderInterface
             return $serviceFactory->createService($serviceLocator);
         });
     }
-
 }
