@@ -32,8 +32,8 @@ class AuthorService
         TableGatewayInterface $tableGateway,
         HydratorInterface $hydrator,
         AuthorInterface $authorEntity
-    )
-    {
+    ) {
+    
         $this->tableGateway = $tableGateway;
         $this->hydrator = $hydrator;
         $this->authorEntity = $authorEntity;
@@ -57,7 +57,7 @@ class AuthorService
     public function addAuthor(AuthorInterface $authorEntity): AuthorInterface
     {
         $data = $this->hydrator->extract($authorEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $id = $this->tableGateway->insert($data);
         $authorEntity->setId($id);
         return $authorEntity;
@@ -70,9 +70,8 @@ class AuthorService
             throw new \InvalidArgumentException('Wrong ID provided for updating this entity');
         }
         $data = $this->hydrator->extract($authorEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $updatedRows = $this->tableGateway->update($data, ['id = ?' => $id]);
         return $updatedRows;
     }
-
 }

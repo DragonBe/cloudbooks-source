@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <description>Cloudbooks Code Validator</description>
+    <file>./src/Cloudbooks</file>
+    <exclude-pattern>*/Tests/*</exclude-pattern>
+    <arg value="np"/>
+    <arg name="colors"/>
+    <arg name="report-summary" value="./build/logs/summary.txt"/>
+    <arg name="report-full" value="./build/logs/full.txt"/>
+    <arg name="report-junit" value="./build/logs/junit-phpcs.xml"/>
+    <arg name="report-checkstyle" value="./build/logs/checkstyle.xml"/>
+    <ini name="memory_limit" value="64M"/>
+    <rule ref="PSR2"/>
+</ruleset>
