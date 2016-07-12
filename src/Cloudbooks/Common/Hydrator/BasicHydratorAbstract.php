@@ -14,7 +14,9 @@ abstract class BasicHydratorAbstract implements HydratorInterface
         $classMethods = get_class_methods($object);
         $array = [];
         foreach ($classMethods as $classMethod) {
-            if (substr($classMethod, 0, 3) !== 'get') continue;
+            if (substr($classMethod, 0, 3) !== 'get') {
+                continue;
+            }
             $key = $this->camelToSnake(substr($classMethod, 3));
             $value = $object->$classMethod();
             $array[$key] = $value;
@@ -50,7 +52,7 @@ abstract class BasicHydratorAbstract implements HydratorInterface
     /**
      * Simple helper functionality to convert a snake_cased string
      * into a camelCased string
-     * 
+     *
      * @param string $string
      * @return string
      */
