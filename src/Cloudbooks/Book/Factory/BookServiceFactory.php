@@ -19,5 +19,4 @@ class BookServiceFactory implements ServiceFactoryInterface
 
         return new BookService($bookTableGateway, $bookHydrator, $bookEntity);
     }
-
 }

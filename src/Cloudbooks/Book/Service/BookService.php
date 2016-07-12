@@ -27,8 +27,8 @@ class BookService
         TableGatewayInterface $tableGateway,
         HydratorInterface $hydrator,
         BookInterface $bookEntity
-    )
-    {
+    ) {
+    
         $this->tableGateway = $tableGateway;
         $this->hydrator = $hydrator;
         $this->bookEntity = $bookEntity;
@@ -52,7 +52,7 @@ class BookService
     public function addBook(BookInterface $bookEntity)
     {
         $data = $this->hydrator->extract($bookEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $result = $this->tableGateway->insert($data);
         $bookEntity->setId($result);
         return $bookEntity;
@@ -65,7 +65,7 @@ class BookService
             throw new \InvalidArgumentException('To update a book, a valid ID is required: ' . $id);
         }
         $data = $this->hydrator->extract($bookEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $result = $this->tableGateway->update($data, ['id = ?' => $id]);
         return $bookEntity;
     }

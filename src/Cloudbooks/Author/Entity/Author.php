@@ -72,5 +72,4 @@ class Author implements AuthorInterface
         $this->biography = $biography;
         return $this;
     }
-
 }

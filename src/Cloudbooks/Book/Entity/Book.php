@@ -138,5 +138,4 @@ class Book implements BookInterface
         $this->memberId = $memberId;
         return $this;
     }
-
 }

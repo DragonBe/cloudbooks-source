@@ -32,8 +32,8 @@ class MemberService
         TableGatewayInterface $tableGateway,
         HydratorInterface $hydrator,
         MemberInterface $memberEntity
-    )
-    {
+    ) {
+    
         $this->tableGateway = $tableGateway;
         $this->hydrator = $hydrator;
         $this->memberEntity = $memberEntity;
@@ -53,7 +53,7 @@ class MemberService
     public function addMember(MemberInterface $memberEntity): MemberInterface
     {
         $data = $this->hydrator->extract($memberEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $lastId = $this->tableGateway->insert($data);
         $memberEntity->setId($lastId);
         return $memberEntity;
@@ -66,9 +66,8 @@ class MemberService
             throw new \InvalidArgumentException('Invalid ID provided for this member entity: ' . $id);
         }
         $data = $this->hydrator->extract($memberEntity);
-        unset ($data['id']);
+        unset($data['id']);
         $updatedRows = $this->tableGateway->update($data, ['id = ?' => $id]);
         return $updatedRows;
     }
-
 }

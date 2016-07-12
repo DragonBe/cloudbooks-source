@@ -19,7 +19,7 @@ interface ServiceFactoryInterface
      * Creates the service using the Service Locator pattern
      * pulling dependencies from the service locator and injects
      * them into the constructor from the concrete service class.
-     * 
+     *
      * @param ServiceLocatorInterface $serviceLocator
      * @return mixed
      */

@@ -19,5 +19,4 @@ class AuthorServiceFactory implements ServiceFactoryInterface
 
         return new AuthorService($authorTable, $authorHydrator, $authorEntity);
     }
-
 }
