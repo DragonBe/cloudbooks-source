@@ -31,6 +31,10 @@ class MemberTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testEntityImplementsInteface
+     * @covers \Cloudbooks\Member\Entity\Member::setId
+     * @covers \Cloudbooks\Member\Entity\Member::setEmail
+     * @covers \Cloudbooks\Member\Entity\Member::setName
+     * @covers \Cloudbooks\Member\Entity\Member::setPassword
      * @covers \Cloudbooks\Member\Entity\Member::getId
      * @covers \Cloudbooks\Member\Entity\Member::getEmail
      * @covers \Cloudbooks\Member\Entity\Member::getName
