@@ -3,6 +3,7 @@
 namespace Cloudbooks\Test\Book\Entity;
 
 use Cloudbooks\Book\Entity\Book;
+use Cloudbooks\Book\Interfaces\BookInterface;
 
 class BookTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,9 +11,11 @@ class BookTest extends \PHPUnit_Framework_TestCase
     {
         $book = new Book();
         $this->assertInstanceOf('\Cloudbooks\Book\Interfaces\BookInterface', $book);
+        return $book;
     }
 
     /**
+     * @depends testBookEntityImplementsBookInterface
      * @covers \Cloudbooks\Book\Entity\Book::getId
      * @covers \Cloudbooks\Book\Entity\Book::getTitle
      * @covers \Cloudbooks\Book\Entity\Book::getAbstract
@@ -20,9 +23,8 @@ class BookTest extends \PHPUnit_Framework_TestCase
      * @covers \Cloudbooks\Book\Entity\Book::getAuthorId
      * @covers \Cloudbooks\Book\Entity\Book::getMemberId
      */
-    public function testBookEntityIsEmptyAtConstruct()
+    public function testBookEntityIsEmptyAtConstruct(BookInterface $book)
     {
-        $book = new Book();
         $this->assertSame(0, $book->getId());
         $this->assertSame('', $book->getTitle());
         $this->assertSame('', $book->getAbstract());
@@ -32,6 +34,7 @@ class BookTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @depends testBookEntityImplementsBookInterface
      * @covers \Cloudbooks\Book\Entity\Book::setId
      * @covers \Cloudbooks\Book\Entity\Book::setTitle
      * @covers \Cloudbooks\Book\Entity\Book::setAbstract
@@ -45,7 +48,7 @@ class BookTest extends \PHPUnit_Framework_TestCase
      * @covers \Cloudbooks\Book\Entity\Book::getAuthorId
      * @covers \Cloudbooks\Book\Entity\Book::getMemberId
      */
-    public function testBookEntityCanBePopulated()
+    public function testBookEntityCanBePopulated(BookInterface $book)
     {
         $data = [
             'id' => 1,
@@ -55,7 +58,7 @@ class BookTest extends \PHPUnit_Framework_TestCase
             'author_id' => 1,
             'member_id' => 1,
         ];
-        $book = new Book();
+
         $book->setId($data['id'])
             ->setTitle($data['title'])
             ->setAbstract($data['abstract'])
