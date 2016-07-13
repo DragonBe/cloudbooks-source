@@ -48,6 +48,8 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::find
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::find
+     * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::fetchAll
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanFindElementsById()
     {
@@ -73,6 +75,7 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::fetchAll
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::fetchAll
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanNotFindElementsByCondition()
     {
@@ -92,6 +95,7 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::fetchAll
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::fetchAll
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanFindElementsByCondition()
     {
@@ -117,6 +121,7 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::fetchRow
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::fetchRow
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanNotFindSingleRowByCondition()
     {
@@ -136,6 +141,7 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::fetchRow
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::fetchRow
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanFindSingleRowByCondition()
     {
@@ -183,6 +189,7 @@ class AuthorTableTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Cloudbooks\Author\Model\AuthorTable::update
      * @covers \Cloudbooks\Common\Db\Table\PdoTableGateway::update
+     * @covers \Cloudbooks\Common\Db\Table\TableAbstract::assembleWhere
      */
     public function testGatewayCanUpdateExistingRowData()
     {
