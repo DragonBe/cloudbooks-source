@@ -16,6 +16,7 @@ class ServiceLocator implements ServiceLocatorInterface
         if (array_key_exists($objectReference, $this->registry)) {
             return $this->registry[$objectReference];
         }
+        return null;
     }
 
     public function set(string $objectReference, $object): ServiceLocator

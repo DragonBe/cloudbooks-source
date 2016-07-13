@@ -17,6 +17,12 @@ use Cloudbooks\Member\Model\MemberTable;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
+/**
+ * Class SilexServiceProvider
+ *
+ * @package Cloudbooks\Common\Provider
+ * @codeCoverageIgnore
+ */
 class SilexServiceProvider implements ServiceProviderInterface
 {
     /**
