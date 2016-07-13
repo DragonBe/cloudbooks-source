@@ -21,11 +21,13 @@ class SilexServiceProvider implements ServiceProviderInterface
 {
     /**
      * @inheritDoc
-     * @todo: move PDO instantiation outside of the service provider
      */
     public function register(Container $container)
     {
-        $pdo = new \PDO('mysql:host=127.0.0.1:3306;dbname=cloudbooks', 'cloudbooks', 'cloudbooks');
+        $dsn = $container['cb_config_db.dsn'] ?: '';
+        $username = $container['cb_config_db.username'] ?: '';
+        $password = $container['cb_config_db.password'] ?: '';
+        $pdo = new \PDO($dsn, $username, $password);
 
         $authorTable = new AuthorTable($pdo);
         $authorHydrator = new AuthorHydrator();
