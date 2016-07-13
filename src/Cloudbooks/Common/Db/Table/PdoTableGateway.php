@@ -62,11 +62,12 @@ class PdoTableGateway extends TableAbstract
     public function insert(array $data): int
     {
         $fields = array_keys($data);
+        $placeholders = array_fill(0, count($fields), '?');
         $query = sprintf(
             'INSERT INTO `%s` (%s) VALUES (%s)',
             $this->tableName,
             implode(', ', $fields),
-            array_fill(0, count($fields), '?')
+            implode(', ', $placeholders)
         );
         $stmt = $this->pdo->prepare($query);
         $stmt->execute(array_values($data));
