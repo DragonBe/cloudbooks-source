@@ -24,16 +24,18 @@ class MemberServiceFactoryTest extends \PHPUnit_Framework_TestCase
         $hydratorMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\HydratorInterface')->getMock();
         $memberEntityMock = $this->getMockBuilder('\Cloudbooks\Member\Interfaces\MemberInterface')->getMock();
         $serviceLocatorMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\ServiceLocatorInterface')->getMock();
+        $memberValidatorMock = $this->getMockBuilder('\Cloudbooks\Common\Interfaces\ValidatorInterface')->getMock();
 
         // Create a return value map
         $valueMap = [
             ['\Cloudbooks\Member\Model\MemberTable', $tableGatewayMock],
             ['\Cloudbooks\Member\Model\MemberHydrator', $hydratorMock],
             ['\Cloudbooks\Member\Entity\Member', $memberEntityMock],
+            ['\Cloudbooks\Member\Model\MemberValitor', $memberValidatorMock],
         ];
 
         // Create the stub
-        $serviceLocatorMock->expects($this->exactly(3))
+        $serviceLocatorMock->expects($this->exactly(4))
             ->method('get')
             ->will($this->returnValueMap($valueMap));
 

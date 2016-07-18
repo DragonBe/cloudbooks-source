@@ -16,7 +16,8 @@ class MemberServiceFactory implements ServiceFactoryInterface
         $memberTable = $serviceLocator->get('\Cloudbooks\Member\Model\MemberTable');
         $memberHydrator = $serviceLocator->get('\Cloudbooks\Member\Model\MemberHydrator');
         $memberEntity = $serviceLocator->get('\Cloudbooks\Member\Entity\Member');
+        $memberValidator = $serviceLocator->get('\Cloudbooks\Member\Model\MemberValitor');
 
-        return new MemberService($memberTable, $memberHydrator, $memberEntity);
+        return new MemberService($memberTable, $memberHydrator, $memberEntity, $memberValidator);
     }
 }

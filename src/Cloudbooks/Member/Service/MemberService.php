@@ -2,6 +2,8 @@
 
 namespace Cloudbooks\Member\Service;
 
+use Cloudbooks\Common\Interfaces\ValidatorInterface;
+use Cloudbooks\Member\Entity\Member;
 use Cloudbooks\Member\Interfaces\MemberInterface;
 use Cloudbooks\Common\Interfaces\HydratorInterface;
 use Cloudbooks\Common\Interfaces\TableGatewayInterface;
@@ -20,6 +22,10 @@ class MemberService
      * @var MemberInterface
      */
     protected $memberEntity;
+    /**
+     * @var ValidatorInterface
+     */
+    protected $memberValidator;
 
     /**
      * AuthorService constructor.
@@ -27,16 +33,19 @@ class MemberService
      * @param TableGatewayInterface $tableGateway
      * @param HydratorInterface $hydrator
      * @param MemberInterface $memberEntity
+     * @param ValidatorInterface $memberValidator
      */
     public function __construct(
         TableGatewayInterface $tableGateway,
         HydratorInterface $hydrator,
-        MemberInterface $memberEntity
+        MemberInterface $memberEntity,
+        ValidatorInterface $memberValidator
     ) {
     
         $this->tableGateway = $tableGateway;
         $this->hydrator = $hydrator;
         $this->memberEntity = $memberEntity;
+        $this->memberValidator = $memberValidator;
     }
 
     public function listMembers(): array
@@ -81,5 +90,21 @@ class MemberService
             return false;
         }
         return true;
+    }
+
+    public function registerNewMember(string $name, string $username, string $password): int
+    {
+        $data = [
+            'name' => $name,
+            'username' => $username,
+            'password' => $password,
+        ];
+
+        if (!$this->memberValidator->isValid($data)) {
+            $messages = $this->memberValidator->getErrors();
+            throw new \InvalidArgumentException(implode(', ', $messages));
+        }
+        $id = $this->tableGateway->insert($data);
+        return $id;
     }
 }
